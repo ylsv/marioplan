@@ -1,11 +1,11 @@
 import ProjectSummary from './ProjectSummary'
 
-export default function ProjectList() {
+export default function ProjectList({projects}) {
   return (
     <div className="project-list section">
-      <ProjectSummary />
-      <ProjectSummary />
-      <ProjectSummary />
+      {projects?.map(project => (
+        <ProjectSummary project={project} key={project.id} />
+      ))}
     </div>
   )
 }

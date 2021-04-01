@@ -1,6 +1,10 @@
 import {useState} from 'react'
+import {useDispatch} from 'react-redux'
+import {createProject} from '../../store/actions/projectActions'
 
 export default function CreateProject() {
+  const dispatch = useDispatch()
+
   const initialFormState = {
     title: '',
     content: '',
@@ -13,6 +17,7 @@ export default function CreateProject() {
 
   function handleSubmit(e) {
     e.preventDefault()
+    dispatch(createProject({type: 'CREATE_PROJECT', form}))
     setForm(initialFormState)
   }
 

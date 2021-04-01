@@ -37,7 +37,7 @@ export default function CreateProject() {
               className="materialize-textarea"
               onChange={handleChange}
               value={form.content}
-            ></textarea>
+            />
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Create</button>

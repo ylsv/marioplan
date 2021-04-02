@@ -7,7 +7,7 @@ export default function Navbar() {
     <nav className="nav-wrapper grey darken-3">
       <div className="container">
         <Link to="/" className="brand-logo left">
-          MarioPlan
+          Plan Creator
         </Link>
         <SignedInLinks />
         <SignedOutLinks />

@@ -1,10 +1,10 @@
 import Notifications from './Notifications'
 import ProjectList from '../project/ProjectList'
 import {useSelector} from 'react-redux'
-import {compose} from 'redux'
-import {firestoreConnect} from 'react-redux-firebase'
+import {useFirestoreConnect} from 'react-redux-firebase'
 
-function Dashboard() {
+export default function Dashboard() {
+  useFirestoreConnect([{collection: 'projects'}])
   const projects = useSelector(state => state.firestore.ordered.projects)
 
   return (
@@ -20,11 +20,3 @@ function Dashboard() {
     </div>
   )
 }
-
-export default compose(
-  firestoreConnect([
-    {
-      collection: 'projects',
-    },
-  ])
-)(Dashboard)

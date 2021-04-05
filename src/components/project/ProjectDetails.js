@@ -1,30 +1,42 @@
+import {useSelector} from 'react-redux'
+import {useFirestoreConnect} from 'react-redux-firebase'
+
 export default function ProjectDetails(props) {
+  useFirestoreConnect([{collection: 'projects'}])
   const {id} = props.match.params
-  return (
-    <div>
-      <div className="container section project-details">
-        <div className="card z-depth-0">
-          <div className="card-content">
-            <span className="card-title">Project Title - {id}</span>
-            <p>
-              Lorem shut the shizzle up dolor crazy gangsta, consectetuer fo
-              shizzle black. Nullam sure velizzle, pizzle volutpizzle,
-              suscipizzle , gravida vizzle, i'm in the shizzle. Pellentesque its
-              fo rizzle tortizzle. Sed eros. The bizzle izzle bow wow wow
-              dapibizzle turpis tempizzle tempor. Mauris pellentesque phat et fo
-              shizzle mah nizzle fo rizzle, mah home g-dizzle. Crunk izzle
-              tortizzle. Pellentesque eleifend rhoncus mah nizzle. In hac
-              habitasse platea dictumst. Away dapibizzle. Cool rizzle uhuh ...
-              yih!, pretizzle break yo neck, yall, mattis izzle, eleifend vitae,
-              nunc. Phat suscipizzle. Integer sempizzle velit sed purizzle.
-            </p>
-            <div className="card-action grey lighten-4 grey-text">
-              <div>Posted by Someone</div>
-              <div>2nd Sep, 2am</div>
+  const projects = useSelector(state => state.firestore.ordered.projects)
+
+  if (projects) {
+    const project = projects.find(project => project.id === id)
+    const {authorFirstName, authorLastName, title, content, createdAt} = project
+    const creationDate = new Date(createdAt.seconds * 1000)
+    const formattedDate = new Intl.DateTimeFormat('ru', {
+      day: '2-digit',
+      month: 'long',
+      year: 'numeric',
+    }).format(creationDate)
+
+    return (
+      <div>
+        <div className="container section project-details">
+          <div className="card z-depth-0">
+            <div className="card-content">
+              <span className="card-title">{title}</span>
+              <p>{content}</p>
+              <div className="card-action grey lighten-4 grey-text">
+                <div>{`Posted by ${authorFirstName} ${authorLastName}`}</div>
+                <div>{formattedDate}</div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  )
+    )
+  } else {
+    return (
+      <div className="container center">
+        <p>Loading project...</p>
+      </div>
+    )
+  }
 }

@@ -1,5 +1,6 @@
 import {useSelector} from 'react-redux'
 import {useFirestoreConnect} from 'react-redux-firebase'
+import {formatSecondsToDate} from '../../helpers/date-formatter'
 
 export default function ProjectDetails(props) {
   useFirestoreConnect([{collection: 'projects'}])
@@ -9,12 +10,7 @@ export default function ProjectDetails(props) {
   if (projects) {
     const project = projects.find(project => project.id === id)
     const {authorFirstName, authorLastName, title, content, createdAt} = project
-    const creationDate = new Date(createdAt.seconds * 1000)
-    const formattedDate = new Intl.DateTimeFormat('ru', {
-      day: '2-digit',
-      month: 'long',
-      year: 'numeric',
-    }).format(creationDate)
+    const creationDate = formatSecondsToDate(createdAt.seconds)
 
     return (
       <div>
@@ -25,7 +21,7 @@ export default function ProjectDetails(props) {
               <p>{content}</p>
               <div className="card-action grey lighten-4 grey-text">
                 <div>{`Posted by ${authorFirstName} ${authorLastName}`}</div>
-                <div>{formattedDate}</div>
+                <div>{creationDate}</div>
               </div>
             </div>
           </div>

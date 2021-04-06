@@ -4,12 +4,32 @@ import './index.css'
 import App from './App'
 import {createStore, applyMiddleware, compose} from 'redux'
 import rootReducer from './store/reducers/rootReducer'
-import {Provider} from 'react-redux'
+import {Provider, useSelector} from 'react-redux'
 import thunk from 'redux-thunk'
 import {createFirestoreInstance, getFirestore} from 'redux-firestore'
-import {ReactReduxFirebaseProvider, getFirebase} from 'react-redux-firebase'
+import {
+  ReactReduxFirebaseProvider,
+  getFirebase,
+  isLoaded,
+} from 'react-redux-firebase'
 import fbConfig from './config/fbConfig'
 import firebase from 'firebase/app'
+import Loader from 'react-loader-spinner'
+
+function AuthIsLoaded({children}) {
+  const auth = useSelector(state => state.firebase.auth)
+  if (!isLoaded(auth))
+    return (
+      <Loader
+        className="loader"
+        type="ThreeDots"
+        color="#424242"
+        height={100}
+        width={100}
+      />
+    )
+  return children
+}
 
 const composeEnhancers =
   (typeof window !== 'undefined' &&
@@ -34,7 +54,9 @@ ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <ReactReduxFirebaseProvider {...rrfProps}>
-        <App />
+        <AuthIsLoaded>
+          <App />
+        </AuthIsLoaded>
       </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,

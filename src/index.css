@@ -36,3 +36,9 @@ textarea.materialize-textarea:focus:not([readonly]) {
   border-color: #ec407a;
   box-shadow: none;
 }
+
+.loader {
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}

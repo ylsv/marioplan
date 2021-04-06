@@ -1,6 +1,10 @@
 import {useState} from 'react'
+import {useSelector, useDispatch} from 'react-redux'
+import {signIn} from '../../store/actions/authActions'
 
 export default function SignIn() {
+  const dispatch = useDispatch()
+  const authError = useSelector(state => state.auth.authError)
   const initialFormState = {email: '', password: ''}
   const [form, setForm] = useState(initialFormState)
 
@@ -10,6 +14,7 @@ export default function SignIn() {
 
   function handleSubmit(e) {
     e.preventDefault()
+    dispatch(signIn(form))
     setForm(initialFormState)
   }
 
@@ -17,7 +22,7 @@ export default function SignIn() {
     <div>
       <div className="container">
         <form onSubmit={handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Sign In</h5>
+          <h5 className="grey-text text-darken-3">Log In</h5>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input
@@ -38,6 +43,9 @@ export default function SignIn() {
           </div>
           <div className="input-field">
             <button className="btn pink lighten-1 z-depth-0">Login</button>
+            <div className="red-text center">
+              {authError ? <p>{authError}</p> : null}
+            </div>
           </div>
         </form>
       </div>

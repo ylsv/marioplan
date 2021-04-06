@@ -1,12 +1,15 @@
 import {useState} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
 import {signIn} from '../../store/actions/authActions'
+import {Redirect} from 'react-router-dom'
 
 export default function SignIn() {
   const dispatch = useDispatch()
   const authError = useSelector(state => state.auth.authError)
   const initialFormState = {email: '', password: ''}
   const [form, setForm] = useState(initialFormState)
+  const auth = useSelector(state => state.firebase.auth)
+  if (auth.uid) return <Redirect to="/" />
 
   function handleChange(e) {
     setForm({...form, [e.target.id]: e.target.value})

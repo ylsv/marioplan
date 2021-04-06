@@ -1,4 +1,6 @@
 import {useState} from 'react'
+import {useSelector} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 
 export default function SignUp() {
   const initialFormState = {
@@ -8,6 +10,9 @@ export default function SignUp() {
     lastName: '',
   }
   const [form, setForm] = useState(initialFormState)
+
+  const auth = useSelector(state => state.firebase.auth)
+  if (auth.uid) return <Redirect to="/" />
 
   function handleChange(e) {
     setForm({...form, [e.target.id]: e.target.value})

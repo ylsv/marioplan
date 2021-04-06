@@ -42,3 +42,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
   display: grid;
   place-content: center;
 }
+
+.noproject {
+  padding-top: 30px;
+}

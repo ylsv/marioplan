@@ -24,5 +24,6 @@ export const signOut = () => {
       .then(() => {
         dispatch({type: 'SIGNOUT_SUCCESS'})
       })
+      .catch(err => console.log(err))
   }
 }

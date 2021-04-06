@@ -1,13 +1,18 @@
 import {NavLink} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import {signOut} from '../../store/actions/authActions'
 
 export default function SignedInLinks() {
+  const dispatch = useDispatch()
+  const logOut = () => dispatch(signOut())
+
   return (
     <ul className="right">
       <li>
         <NavLink to="/create">New Project</NavLink>
       </li>
       <li>
-        <NavLink to="/">Log Out</NavLink>
+        <a onClick={logOut}>Log Out</a>
       </li>
       <li>
         <NavLink to="/" className="btn btn-floating pink lighten-1">

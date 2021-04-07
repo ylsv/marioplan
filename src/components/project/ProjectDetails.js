@@ -26,7 +26,7 @@ export default function ProjectDetails(props) {
     return (
       <div>
         <div className="container section project-details">
-          <div className="card z-depth-0">
+          <div className="card z-depth-1">
             <div className="card-content">
               <span className="card-title">{title}</span>
               <p>{content}</p>

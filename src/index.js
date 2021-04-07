@@ -6,7 +6,11 @@ import {createStore, applyMiddleware, compose} from 'redux'
 import rootReducer from './store/reducers/rootReducer'
 import {Provider, useSelector} from 'react-redux'
 import thunk from 'redux-thunk'
-import {createFirestoreInstance, getFirestore} from 'redux-firestore'
+import {
+  createFirestoreInstance,
+  getFirestore,
+  reduxFirestore,
+} from 'redux-firestore'
 import {
   ReactReduxFirebaseProvider,
   getFirebase,
@@ -39,13 +43,19 @@ const composeEnhancers =
 const store = createStore(
   rootReducer,
   composeEnhancers(
-    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore}))
+    applyMiddleware(thunk.withExtraArgument({getFirebase, getFirestore})),
+    reduxFirestore(firebase, fbConfig)
   )
 )
 
+const rrfConfig = {
+  userProfile: 'users',
+  useFirestoreForProfile: true,
+}
+
 const rrfProps = {
   firebase,
-  config: fbConfig,
+  config: rrfConfig,
   dispatch: store.dispatch,
   createFirestoreInstance,
 }

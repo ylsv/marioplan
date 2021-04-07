@@ -5,6 +5,7 @@ import {useSelector} from 'react-redux'
 
 export default function Navbar() {
   const auth = useSelector(state => state.firebase.auth)
+  const profile = useSelector(state => state.firebase.profile)
 
   return (
     <nav className="nav-wrapper grey darken-3">
@@ -12,7 +13,7 @@ export default function Navbar() {
         <Link to="/" className="brand-logo left">
           Plan Creator
         </Link>
-        {auth.uid ? <SignedInLinks /> : <SignedOutLinks />}
+        {auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />}
       </div>
     </nav>
   )

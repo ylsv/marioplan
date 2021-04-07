@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import {createProject} from '../../store/actions/projectActions'
 import {Redirect} from 'react-router-dom'
 
-export default function CreateProject() {
+export default function CreateProject(props) {
   const dispatch = useDispatch()
 
   const initialFormState = {
@@ -19,7 +19,7 @@ export default function CreateProject() {
   function handleSubmit(e) {
     e.preventDefault()
     dispatch(createProject({type: 'CREATE_PROJECT', form}))
-    setForm(initialFormState)
+    props.history.push('/')
   }
 
   const auth = useSelector(state => state.firebase.auth)

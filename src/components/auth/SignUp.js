@@ -5,6 +5,7 @@ import {signUp} from '../../store/actions/authActions'
 
 export default function SignUp() {
   const dispatch = useDispatch()
+  const curLang = useSelector(state => state.language.currentLanguage)
   const authError = useSelector(state => state.auth.authError)
   const initialFormState = {
     email: '',
@@ -30,9 +31,13 @@ export default function SignUp() {
     <div>
       <div className="container">
         <form onSubmit={handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Sign Up</h5>
+          <h5 className="grey-text text-darken-3">
+            {curLang === 'ru' ? 'Регистрация' : 'Sign Up'}
+          </h5>
           <div className="input-field">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              {curLang === 'ru' ? 'Электронная почта' : 'Email'}
+            </label>
             <input
               type="email"
               id="email"
@@ -41,7 +46,9 @@ export default function SignUp() {
             />
           </div>
           <div className="input-field">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">
+              {curLang === 'ru' ? 'Пароль' : 'Password'}
+            </label>
             <input
               type="password"
               id="password"
@@ -50,7 +57,9 @@ export default function SignUp() {
             />
           </div>
           <div className="input-field">
-            <label htmlFor="firstName">First Name</label>
+            <label htmlFor="firstName">
+              {curLang === 'ru' ? 'Имя' : 'First Name'}
+            </label>
             <input
               type="text"
               id="firstName"
@@ -59,7 +68,9 @@ export default function SignUp() {
             />
           </div>
           <div className="input-field">
-            <label htmlFor="lastName">Last Name</label>
+            <label htmlFor="lastName">
+              {curLang === 'ru' ? 'Фамилия' : 'Last Name'}
+            </label>
             <input
               type="text"
               id="lastName"
@@ -68,7 +79,9 @@ export default function SignUp() {
             />
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Sign Up</button>
+            <button className="btn pink lighten-1 z-depth-0">
+              {curLang === 'ru' ? 'Зарегистрироваться' : 'Sign Up'}
+            </button>
           </div>
           <div className="red-text center">
             {authError && `Error: ${authError}`}

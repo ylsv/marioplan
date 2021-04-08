@@ -5,7 +5,7 @@ import {Redirect} from 'react-router-dom'
 
 export default function CreateProject(props) {
   const dispatch = useDispatch()
-
+  const curLang = useSelector(state => state.language.currentLanguage)
   const initialFormState = {
     title: '',
     content: '',
@@ -29,9 +29,13 @@ export default function CreateProject(props) {
     <div>
       <div className="container">
         <form onSubmit={handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Create New Project</h5>
+          <h5 className="grey-text text-darken-3">
+            {curLang === 'ru' ? 'Создать новый проект' : 'Create New Project'}
+          </h5>
           <div className="input-field">
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title">
+              {curLang === 'ru' ? 'Название' : 'Title'}
+            </label>
             <input
               type="text"
               id="title"
@@ -40,7 +44,9 @@ export default function CreateProject(props) {
             />
           </div>
           <div className="input-field">
-            <label htmlFor="content">Project Content</label>
+            <label htmlFor="content">
+              {curLang === 'ru' ? 'Содержание проекта' : 'Project Content'}
+            </label>
             <textarea
               id="content"
               className="materialize-textarea"
@@ -49,7 +55,9 @@ export default function CreateProject(props) {
             />
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Create</button>
+            <button className="btn pink lighten-1 z-depth-0">
+              {curLang === 'ru' ? 'Создать' : 'Create'}
+            </button>
           </div>
         </form>
       </div>

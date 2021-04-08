@@ -6,6 +6,7 @@ import {Redirect} from 'react-router-dom'
 export default function SignIn() {
   const dispatch = useDispatch()
   const authError = useSelector(state => state.auth.authError)
+  const curLang = useSelector(state => state.language.currentLanguage)
   const initialFormState = {email: '', password: ''}
   const [form, setForm] = useState(initialFormState)
   const auth = useSelector(state => state.firebase.auth)
@@ -25,9 +26,13 @@ export default function SignIn() {
     <div>
       <div className="container">
         <form onSubmit={handleSubmit} className="white">
-          <h5 className="grey-text text-darken-3">Log In</h5>
+          <h5 className="grey-text text-darken-3">
+            {curLang === 'ru' ? 'Вход в систему' : 'Log In'}
+          </h5>
           <div className="input-field">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">
+              {curLang === 'ru' ? 'Электронная почта' : 'Email'}
+            </label>
             <input
               type="email"
               id="email"
@@ -36,7 +41,9 @@ export default function SignIn() {
             />
           </div>
           <div className="input-field">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">
+              {curLang === 'ru' ? 'Пароль' : 'Password'}
+            </label>
             <input
               type="password"
               id="password"
@@ -45,7 +52,9 @@ export default function SignIn() {
             />
           </div>
           <div className="input-field">
-            <button className="btn pink lighten-1 z-depth-0">Login</button>
+            <button className="btn pink lighten-1 z-depth-0">
+              {curLang === 'ru' ? 'Войти' : 'Login'}
+            </button>
             <div className="red-text center">
               {authError ? <p>{authError}</p> : null}
             </div>

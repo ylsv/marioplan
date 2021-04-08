@@ -7,7 +7,7 @@ export default function ProjectDetails(props) {
   useFirestoreConnect([{collection: 'projects'}])
   const {id} = props.match.params
   const projects = useSelector(state => state.firestore.ordered.projects)
-
+  const curLang = useSelector(state => state.language.currentLanguage)
   const auth = useSelector(state => state.firebase.auth)
   if (!auth.uid) return <Redirect to="/signin" />
 
@@ -21,7 +21,7 @@ export default function ProjectDetails(props) {
       )
 
     const {authorFirstName, authorLastName, title, content, createdAt} = project
-    const creationDate = formatSecondsToDate(createdAt.seconds)
+    const creationDate = formatSecondsToDate(createdAt.seconds, curLang)
 
     return (
       <div>
@@ -31,7 +31,11 @@ export default function ProjectDetails(props) {
               <span className="card-title">{title}</span>
               <p>{content}</p>
               <div className="card-action red lighten-5 grey-text">
-                <div>{`Posted by ${authorFirstName} ${authorLastName}`}</div>
+                <div>
+                  {curLang === 'ru'
+                    ? `Создан пользователем ${authorFirstName} ${authorLastName}`
+                    : `Posted by ${authorFirstName} ${authorLastName}`}
+                </div>
                 <div>{creationDate}</div>
               </div>
             </div>
@@ -42,7 +46,7 @@ export default function ProjectDetails(props) {
   } else {
     return (
       <div className="container center">
-        <p>Loading project...</p>
+        <p>{curLang === 'ru' ? 'Загрузка' : 'Loading project...'}</p>
       </div>
     )
   }

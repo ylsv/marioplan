@@ -6,7 +6,6 @@ export const createNotification = data => {
       .add({
         authorName: `${data.firstName} ${data.lastName}`,
         authorId: data.authorId,
-        content: 'создал проект',
         projectName: data.projectName,
         createdAt: data.createdAt,
       })

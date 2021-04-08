@@ -30,7 +30,7 @@ export default function ProjectDetails(props) {
             <div className="card-content">
               <span className="card-title">{title}</span>
               <p>{content}</p>
-              <div className="card-action grey lighten-4 grey-text">
+              <div className="card-action red lighten-5 grey-text">
                 <div>{`Posted by ${authorFirstName} ${authorLastName}`}</div>
                 <div>{creationDate}</div>
               </div>

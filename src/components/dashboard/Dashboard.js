@@ -7,8 +7,12 @@ import {Redirect} from 'react-router-dom'
 export default function Dashboard() {
   useFirestoreConnect([
     {collection: 'projects', orderBy: ['createdAt', 'desc']},
+    {collection: 'notifications', orderBy: ['createdAt', 'desc']},
   ])
   const projects = useSelector(state => state.firestore.ordered.projects)
+  const notifications = useSelector(
+    state => state.firestore.ordered.notifications
+  )
   const auth = useSelector(state => state.firebase.auth)
   if (!auth.uid) return <Redirect to="/signin" />
 
@@ -19,7 +23,7 @@ export default function Dashboard() {
           <ProjectList projects={projects} />
         </div>
         <div className="col s12 m5 offset-m1">
-          <Notifications />
+          <Notifications data={notifications} />
         </div>
       </div>
     </div>

@@ -7,20 +7,19 @@ export default function Notifications({data: notifications}) {
         <div className="card-content">
           <span className="card-title">Notifications</span>
           <ul className="notifications">
-            {notifications &&
-              notifications.map(note => {
-                const creationDate = formatSecondsToDate(note.createdAt.seconds)
-                return (
-                  <li key={note.id}>
-                    <span className="pink-text">
-                      {`Пользователь ${note.authorName} `}
-                    </span>
-                    <span>{note.content}</span>
-                    <span> {note.projectName}</span>
-                    <div className="grey-text note-date">{creationDate}</div>
-                  </li>
-                )
-              })}
+            {notifications?.map(note => {
+              const creationDate = formatSecondsToDate(note.createdAt.seconds)
+              return (
+                <li key={note.id}>
+                  <span className="pink-text">
+                    {`Пользователь ${note.authorName} `}
+                  </span>
+                  <span>{note.content}</span>
+                  <span> {note.projectName}</span>
+                  <div className="grey-text note-date">{creationDate}</div>
+                </li>
+              )
+            })}
           </ul>
         </div>
       </div>

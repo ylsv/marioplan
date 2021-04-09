@@ -5,6 +5,7 @@ export const createProject = ({form: project}) => {
     const firestore = getFirestore()
     const {firstName, lastName} = getState().firebase.profile
     const authorId = getState().firebase.auth.uid
+    dispatch({type: 'SHOW_LOADER'})
     firestore
       .collection('projects')
       .add({
@@ -28,6 +29,7 @@ export const createProject = ({form: project}) => {
       })
       .catch(err => {
         dispatch({type: 'CREATE_PROJECT_ERROR', err})
+        dispatch({type: 'HIDE_LOADER'})
       })
   }
 }

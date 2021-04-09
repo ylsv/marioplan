@@ -11,9 +11,11 @@ export const createNotification = data => {
       })
       .then(() => {
         dispatch({type: 'CREATE_NOTIFICATION', data})
+        dispatch({type: 'HIDE_LOADER'})
       })
       .catch(err => {
         dispatch({type: 'CREATE_NOTIFICATION_ERROR', err})
+        dispatch({type: 'HIDE_LOADER'})
       })
   }
 }

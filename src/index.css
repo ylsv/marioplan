@@ -39,8 +39,14 @@ textarea.materialize-textarea:focus:not([readonly]) {
 
 .loader {
   min-height: 100vh;
+  min-width: 100vw;
   display: grid;
   place-content: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.3);
+  z-index: 100;
 }
 
 .noproject {

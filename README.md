@@ -1,3 +1,6 @@
+![image](https://user-images.githubusercontent.com/45428896/116088655-bd914f00-a6aa-11eb-836f-d541f2bc0beb.png)
+
+
 # App for project creation and tracking
 
 Tech used: React, React Router, Redux, Firebase, Materialize CSS
